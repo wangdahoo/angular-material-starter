@@ -1,0 +1,12 @@
+# WebStorm
+.idea
+
+# Node
+node_modules/
+npm-debug.log
+
+# Bower
+bower_components/
+
+# XOS
+.DS_Store
