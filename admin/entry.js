@@ -1,2 +1,2 @@
 require('./js/app');
-angular.bootstrap(document, ['app']);
+angular.bootstrap(document.body, ['app']);

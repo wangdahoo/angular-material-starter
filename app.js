@@ -30,50 +30,61 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/statics', express.static(path.join(__dirname, 'bower_components')));
 
 /* Angular Templates */
-app.use('/view', express.static(path.join(__dirname, 'templates')));
+app.use('/admin/view', express.static(path.join(__dirname, 'templates/admin')));
+app.use('/client/view', express.static(path.join(__dirname, 'templates/client')));
 
 /* Routes */
 app.use('/', require('./routes/index'));
 
-var config_file = env == PRODUCTION ? './webpack.config' : './webpack.config.dev';
-var config = require(config_file);
-var compiler = webpack(config);
-
 // use webpack-dev-middleware for DEVELOPMENT
 if (env == DEVELOPMENT) {
 
-    var middleware = webpackDevMiddleware(compiler, {
-        publicPath: config.output.publicPath,
-        stats: {
-            colors: true,
-            hash: false,
-            timings: true,
-            chunks: false,
-            chunkModules: false,
-            modules: false
-        }
-    });
+  var config = require('./webpack.config.dev');
+  var compiler = webpack(config);
 
-    app.use(middleware);
-    app.use(webpackHotMiddleware(compiler));
-    app.use('/admin', express.static(path.join(__dirname, config.output.publicPath)));
-    app.get('*', function response(req, res) {
-        res.write(middleware.fileSystem.readFileSync(path.join(__dirname, config.output.publicPath + '/index.html')));
-        res.end();
-    });
+  var middleware = webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false
+    }
+  });
+
+  app.use(middleware);
+  app.use(webpackHotMiddleware(compiler));
+
+  app.use('/admin', express.static(path.join(__dirname, config.output.publicPath)));
+  app.get('/admin/*', function response(req, res) {
+    res.sendFile(path.join(__dirname, 'admin/dev.html'));
+  });
+
+  app.use('/client', express.static(path.join(__dirname, config.output.publicPath)));
+  app.get('/client/*', function response(req, res) {
+    res.sendFile(path.join(__dirname, 'client/dev.html'));
+  });
+
 } else {
-    //app.use('/', express.static(path.join(__dirname, 'dist')));
-    //
-    //app.get('*', function response(req, res) {
-    //    res.sendFile(path.join(__dirname, 'dist/index.html'));
-    //});
+
+  app.use('/admin', express.static(path.join(__dirname, 'dist/admin')));
+  app.get('/admin/*', function response(req, res) {
+    res.sendFile(path.join(__dirname, 'dist/admin/index.html'));
+  });
+
+  app.use('/client', express.static(path.join(__dirname, 'dist/client')));
+  app.get('/client/*', function response(req, res) {
+    res.sendFile(path.join(__dirname, 'dist/client/index.html'));
+  });
 }
 
 
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handlers
@@ -81,23 +92,23 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
     });
+  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 

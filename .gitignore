@@ -10,3 +10,6 @@ bower_components/
 
 # XOS
 .DS_Store
+
+# dist
+dist/

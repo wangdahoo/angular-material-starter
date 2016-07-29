@@ -1,6 +1,6 @@
 /* controllers */
 require('./controller/login');
-var TPL_URL = '/admin/view/';
+var TPL_URL = '/client/view/';
 
 function tpl(tplName) {
   return TPL_URL + tplName + '.html';

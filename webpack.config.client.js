@@ -13,12 +13,12 @@ function getDateTag() {
 module.exports = {
 
   entry: [
-    path.resolve(__dirname, 'src/app.js')
+    path.resolve(__dirname, 'client/entry.js')
   ],
 
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle-' + getDateTag() + '-[hash:8].js'
+    path: path.join(__dirname, 'dist/client'),
+    filename: 'client-' + getDateTag() + '-[hash:8].js'
   },
 
   module: {
@@ -32,7 +32,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'client/index.html',
       inject: 'body',
       filename: 'index.html'
     }),

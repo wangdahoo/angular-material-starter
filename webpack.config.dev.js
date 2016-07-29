@@ -1,19 +1,25 @@
 var path = require('path');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-source-map',
 
-  entry: [
-    'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, 'admin/entry.js')
-  ],
+  entry: {
+    'admin': [
+      'webpack-hot-middleware/client?reload=true',
+      path.join(__dirname, 'admin/entry.js')
+    ],
+
+    'client': [
+      'webpack-hot-middleware/client?reload=true',
+      path.join(__dirname, 'client/entry.js')
+    ]
+  },
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/admin'
+    filename: '[name]-bundle.js',
+    publicPath: '/dist'
   },
 
   module: {
@@ -26,11 +32,6 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      template: 'admin/index.html',
-      inject: 'body',
-      filename: 'index.html'
-    }),
     new webpack.HotModuleReplacementPlugin()
   ]
 };
