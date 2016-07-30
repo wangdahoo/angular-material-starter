@@ -1,0 +1,35 @@
+<div layout="column" ng-cloak>
+
+  <div layout layout-padding="20">
+    <div class="md-display-2" flex style="text-align: center">
+      ADMIN
+    </div>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div layout="row" style="padding-top: 40px">
+    <div flex></div>
+    <div style="width: 400px">
+      <md-content>
+        <md-input-container class="md-block">
+          <label>Username</label>
+          <input ng-model="form.name" type="text">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>Password</label>
+          <input ng-model="form.password" type="password">
+        </md-input-container>
+      </md-content>
+
+      <md-button class="md-primary md-raised" ng-click="login(form)"
+                 style="width: 100%; margin-left: 0;">
+        Login
+      </md-button>
+
+    </div>
+    <div flex></div>
+  </div>
+
+</div>

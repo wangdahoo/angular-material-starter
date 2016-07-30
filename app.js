@@ -28,10 +28,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /* Bower Components */
 app.use('/statics', express.static(path.join(__dirname, 'bower_components')));
+/* Material Icons */
+app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
 
 /* Angular Templates */
-app.use('/admin/view', express.static(path.join(__dirname, 'templates/admin')));
-app.use('/client/view', express.static(path.join(__dirname, 'templates/client')));
+app.use('/admin/view', express.static(path.join(__dirname, 'admin_view')));
+app.use('/client/view', express.static(path.join(__dirname, 'client_view')));
 
 /* Routes */
 app.use('/', require('./routes/index'));
@@ -79,7 +81,6 @@ if (env == DEVELOPMENT) {
     res.sendFile(path.join(__dirname, 'dist/client/index.html'));
   });
 }
-
 
 app.use(function (req, res, next) {
   var err = new Error('Not Found');

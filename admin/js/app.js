@@ -1,5 +1,8 @@
 /* controllers */
 require('./controller/login');
+require('./controller/dashboard');
+require('./controller/home');
+
 var TPL_URL = '/admin/view/';
 
 function tpl(tplName) {
@@ -20,6 +23,21 @@ module.exports = angular
           url: '/login',
           controller: 'LoginCtrl',
           templateUrl: tpl('login')
+        })
+
+        // Dashboard Layout
+        .state('dashboard', {
+          url: '/dashboard',
+          abstract: true,
+          controller: 'DashboardCtrl',
+          templateUrl: tpl('dashboard')
+        })
+
+        // 默认页
+        .state('dashboard.home', {
+          url: '/home',
+          controller: 'HomeCtrl',
+          templateUrl: tpl('home')
         })
 
       ;
