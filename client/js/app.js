@@ -1,6 +1,8 @@
 /* controllers */
 require('./controller/login');
-var TPL_URL = '/client/view/';
+require('./controller/home');
+
+var TPL_URL = '/templates/';
 
 function tpl(tplName) {
   return TPL_URL + tplName + '.html';
@@ -15,11 +17,16 @@ module.exports = angular
 
       $stateProvider
 
-        // 管理员登录
         .state('login', {
           url: '/login',
           controller: 'LoginCtrl',
           templateUrl: tpl('login')
+        })
+
+        .state('home', {
+          url: '/home',
+          controller: 'HomeCtrl',
+          templateUrl: tpl('home')
         })
 
       ;

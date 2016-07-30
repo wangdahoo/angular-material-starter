@@ -32,8 +32,7 @@ app.use('/statics', express.static(path.join(__dirname, 'bower_components')));
 app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
 
 /* Angular Templates */
-app.use('/admin/view', express.static(path.join(__dirname, 'admin_view')));
-app.use('/client/view', express.static(path.join(__dirname, 'client_view')));
+app.use('/templates', express.static(path.join(__dirname, 'templates')));
 
 /* Routes */
 app.use('/', require('./routes/index'));
@@ -59,26 +58,16 @@ if (env == DEVELOPMENT) {
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
 
-  app.use('/admin', express.static(path.join(__dirname, config.output.publicPath)));
-  app.get('/admin/*', function response(req, res) {
-    res.sendFile(path.join(__dirname, 'admin/dev.html'));
-  });
-
-  app.use('/client', express.static(path.join(__dirname, config.output.publicPath)));
-  app.get('/client/*', function response(req, res) {
+  app.use('/', express.static(path.join(__dirname, config.output.publicPath)));
+  app.get('*', function response(req, res) {
     res.sendFile(path.join(__dirname, 'client/dev.html'));
   });
 
 } else {
 
-  app.use('/admin', express.static(path.join(__dirname, 'dist/admin')));
-  app.get('/admin/*', function response(req, res) {
-    res.sendFile(path.join(__dirname, 'dist/admin/index.html'));
-  });
-
-  app.use('/client', express.static(path.join(__dirname, 'dist/client')));
-  app.get('/client/*', function response(req, res) {
-    res.sendFile(path.join(__dirname, 'dist/client/index.html'));
+  app.use('/', express.static(path.join(__dirname, 'dist')));
+  app.get('*', function response(req, res) {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
 }
 

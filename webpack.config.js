@@ -17,7 +17,7 @@ module.exports = {
   ],
 
   output: {
-    path: path.join(__dirname, 'dist/client'),
+    path: path.join(__dirname, 'dist'),
     filename: 'client-' + getDateTag() + '-[hash:8].js'
   },
 

@@ -5,11 +5,6 @@ module.exports = {
   devtool: 'cheap-source-map',
 
   entry: {
-    'admin': [
-      'webpack-hot-middleware/client?reload=true',
-      path.join(__dirname, 'admin/entry.js')
-    ],
-
     'client': [
       'webpack-hot-middleware/client?reload=true',
       path.join(__dirname, 'client/entry.js')

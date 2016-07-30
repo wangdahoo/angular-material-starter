@@ -1,0 +1,54 @@
+<div layout="column" layout-fill>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <span >Home</span>
+      <span flex></span>
+
+      <md-menu>
+        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open sample menu">
+          <i class="ion-android-menu" style="font-size: 28px"></i>
+        </md-button>
+
+        <md-menu-content>
+          <md-menu-item><md-button ng-click="doSomething()">Do Something</md-button></md-menu-item>
+        </md-menu-content>
+      </md-menu>
+
+
+    </div>
+  </md-toolbar>
+
+  <md-content layout="column" layout-padding>
+
+    <p>
+      Welcome.
+    </p>
+
+    <md-button class="md-primary md-raised" ng-click="toggle()">
+      Open
+    </md-button>
+
+  </md-content>
+
+  <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="left">
+
+    <md-toolbar class="md-theme-left">
+      <h1 class="md-toolbar-tools">Sidenav Left</h1>
+    </md-toolbar>
+
+    <md-content layout-padding>
+      <form>
+        <md-input-container>
+          <label for="testInput">Test input</label>
+          <input type="text" id="testInput"
+                 ng-model="data" md-autofocus>
+        </md-input-container>
+      </form>
+
+      <md-button ng-click="toggle()" class="md-primary">
+        Close
+      </md-button>
+    </md-content>
+
+  </md-sidenav>
+</div>

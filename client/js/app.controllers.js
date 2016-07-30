@@ -1,2 +1,4 @@
-require('../scss/client.scss');
-module.exports = angular.module('appControllers', ['ngMaterial', 'ui.router']);
+require('./app.services');
+require('./app.directives');
+
+module.exports = angular.module('appControllers', ['appServices', 'appDirectives']);

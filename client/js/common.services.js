@@ -1,4 +1,4 @@
-require('../scss/admin.scss');
+require('../scss/client.scss');
 var Storage = require('./common/storage');
 
 console.info('Common Services Load!');
